@@ -1,0 +1,19 @@
+# Secrets: never commit the real .env
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# OS and tools
+.DS_Store
+.claude/
+
+# Price database: Yahoo Finance data cannot be redistributed.
+# Rebuild it with: python -m src.refresh
+data/*.duckdb
+data/*.duckdb.wal

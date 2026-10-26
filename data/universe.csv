@@ -1,0 +1,32 @@
+ticker,name,sector
+TLT,iShares 20+ Year Treasury,ETF Bond
+AAPL,Apple Inc.,Technology
+MSFT,Microsoft Corp.,Technology
+GOOGL,Alphabet Inc.,Communication Services
+AMZN,Amazon.com Inc.,Consumer Discretionary
+META,Meta Platforms Inc.,Communication Services
+NVDA,NVIDIA Corp.,Technology
+JNJ,Johnson & Johnson,Healthcare
+UNH,UnitedHealth Group,Healthcare
+LLY,Eli Lilly and Co.,Healthcare
+JPM,JPMorgan Chase,Financials
+BRK-B,Berkshire Hathaway,Financials
+V,Visa Inc.,Financials
+CAT,Caterpillar Inc.,Industrials
+HON,Honeywell International,Industrials
+KO,Coca-Cola Co.,Consumer Staples
+PG,Procter & Gamble,Consumer Staples
+WMT,Walmart Inc.,Consumer Staples
+COST,Costco Wholesale,Consumer Staples
+XOM,Exxon Mobil,Energy
+CVX,Chevron Corp.,Energy
+SPY,SPDR S&P 500 ETF,ETF Broad
+QQQ,Invesco QQQ Trust,ETF Tech
+IWM,iShares Russell 2000,ETF Small-Cap
+EFA,iShares MSCI EAFE,ETF International
+EEM,iShares MSCI Emerging,ETF Emerging
+XLF,Financial Select SPDR,ETF Sector
+XLK,Technology Select SPDR,ETF Sector
+XLE,Energy Select SPDR,ETF Sector
+XLV,Health Care Select SPDR,ETF Sector
+GLD,SPDR Gold Trust,ETF Commodity
