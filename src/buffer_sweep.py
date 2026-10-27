@@ -190,10 +190,10 @@ def plot(results: dict[str, pd.DataFrame], path: Path) -> None:
     # (codifica secondaria, l'identità non dipende solo dal colore).
     styles = [("#2a78d6", "o"), ("#eb6834", "s"), ("#1baf7a", "^")]
     panels = [
-        ("sharpe", "Sharpe", 1.0),
-        ("cagr", "CAGR (%)", 100.0),
+        ("sharpe", "Sharpe ratio", 1.0),
+        ("cagr", "Annual return, CAGR (%)", 100.0),
         ("max_dd", "Max drawdown (%)", 100.0),
-        ("whipsaw_pct", "Whipsaw (% degli switch)", 100.0),
+        ("whipsaw_pct", "Whipsaws (% of regime switches reversed within 4 weeks)", 100.0),
     ]
     fig, axes = plt.subplots(2, 2, figsize=(12, 8), sharex=True)
     fig.patch.set_facecolor("#fcfcfb")
@@ -211,10 +211,10 @@ def plot(results: dict[str, pd.DataFrame], path: Path) -> None:
             ax.spines[s].set_color("#c3c2b7")
         ax.tick_params(colors="#52514e", labelsize=9)
     for ax in axes[1]:
-        ax.set_xlabel("regime_buffer_pct (%)", color="#52514e")
+        ax.set_xlabel("Dead band around the 200-day average (%)", color="#52514e")
     axes[0, 0].legend(frameon=False, fontsize=9)
-    fig.suptitle("Sensibilità a regime_buffer_pct (confirm_weeks=0, costi 5 bps; "
-                 "linea tratteggiata = 2%)", fontsize=12, color="#0b0b0b")
+    fig.suptitle("Sensitivity to the width of the dead band (weekly backtest, 5 bps costs; "
+                 "dashed line = 2%, chosen before the sweep)", fontsize=12, color="#0b0b0b")
     fig.tight_layout()
     fig.savefig(path, dpi=150, facecolor=fig.get_facecolor())
     plt.close(fig)
@@ -263,7 +263,18 @@ def main() -> None:
     p = argparse.ArgumentParser(description="Sensitivity sweep di regime_buffer_pct.")
     p.add_argument("--end", type=str, default=None,
                    help="Fine dei periodi. Default = end_date della baseline in DB.")
+    p.add_argument("--plot-only", action="store_true",
+                   help="Redraw the chart from the saved CSVs, without re-running any backtest.")
     args = p.parse_args()
+
+    if args.plot_only:
+        files = [("Full period (2012-2026)", "sweep_full.csv"),
+                 ("2012-2018", "sweep_2012_2018.csv"),
+                 ("2019-2026", "sweep_2019_2026.csv")]
+        results = {label: pd.read_csv(OUT_DIR / f) for label, f in files}
+        plot(results, OUT_DIR / "sweep_buffer.png")
+        print(f"Chart redrawn: {OUT_DIR / 'sweep_buffer.png'}")
+        return
 
     base_cfg = StrategyConfig(regime_confirm_weeks=0)
     ref_end = sanity_checks(base_cfg)
