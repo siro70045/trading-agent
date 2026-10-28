@@ -5,7 +5,7 @@ A rule-based, trend-following trading system for US equities, built and backtest
 ## Status
 
 - **v1, complete.** 20 large-cap US stocks plus a few ETFs, one decision a week. A 200-day trend filter, 12-1 momentum ranking (top 5), inverse-volatility weights capped at 35%, and a market regime (SPY above or below its 200-day average) that moves to gold and long Treasuries, or to cash. A ±2% dead band around the average cuts the share of regime switches reversed within four weeks from 46% to 25%.
-- **v2, in progress.** The same idea on the nine original sector ETFs, to remove the selection bias I found in v1: I picked the 20 stocks in 2026, knowing which ones had won. The universe and the rules are fixed in `src/sector_universe.py` before any result; the backtest is being written.
+- **v2, in progress.** The nine original sector ETFs instead of hand-picked stocks, to remove the selection bias I found in v1: I picked the 20 stocks in 2026, knowing which ones had won. v2 also uses simpler rules (top 3 sectors by 12-1 momentum, equal weights, cash when momentum is negative, monthly rebalancing), fixed in `src/sector_universe.py` before any result. To separate the effect of the universe from that of the rules, I will also run the v1 rules unchanged on the same nine funds. Both backtests are being written.
 
 ## v1 results (Jan 2012 – Apr 2026, weekly, 5 bps per trade)
 
